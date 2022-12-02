@@ -2,11 +2,14 @@ cmake_minimum_required(VERSION 3.20)
 project(cpp)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS -pthread) # 多线程
 
 find_package(OpenCV REQUIRED)
 
 include_directories(./include)
 include_directories(./include/NumCpp)
+include_directories(./include/CppHttplib)
+
 
 file(GLOB SC_FILES "*.cpp" "*.h")
 aux_source_directory(./src SRC_LIST)
