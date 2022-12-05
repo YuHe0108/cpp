@@ -19,3 +19,4 @@ std::shared_ptr<cv::Mat> LetterBox(const std::shared_ptr<cv::Mat> &inputs, const
                        cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0));
     return std::make_shared<cv::Mat>(res);
 }
+

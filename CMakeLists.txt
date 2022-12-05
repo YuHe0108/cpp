@@ -9,6 +9,7 @@ find_package(OpenCV REQUIRED)
 include_directories(./include)
 include_directories(./include/NumCpp)
 include_directories(./include/CppHttplib)
+include_directories(./include/nlohmann)
 
 
 file(GLOB SC_FILES "*.cpp" "*.h")

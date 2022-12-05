@@ -13,4 +13,6 @@
 
 std::shared_ptr<cv::Mat> LetterBox(const std::shared_ptr<cv::Mat> &inputs, const int resizeHeight, const int resizedWidth);
 
+std::string EncodeMat2Base64(const std::string& imgPath);
+
 #endif //CPP_IMAGE_UTILS_H
