@@ -6,13 +6,13 @@
 #include <future>
 #include <thread>
 #include <fstream>
-#include <stdlib.h>
 
 #include "opencv2/opencv.hpp"
 #include <nlohmann/json.hpp>
 #include "image_utils.h"
 #include "NumCpp.hpp"
 #include "httplib.h"
+#include "pathlib.h"
 #include "common.h"
 #include "base64.h"
 /*
@@ -112,6 +112,7 @@ int main() {
     }; // params.find("note")->second, 字典结构
 
     // 编码
+    /*
     std::string imgPath = "/mnt/YuHe/remote_code/2.jpg";
     std::ifstream is(imgPath, std::ifstream::in | std::ios::binary);
     is.seekg(0, std::ifstream::end);
@@ -120,8 +121,9 @@ int main() {
     char *buffer = new char[length];
     is.read(buffer, length);
     std::string str_encode = aip::base64_encode(buffer, length);
-
+    */
     // 将mat图转换为base64
+    /*
     std::vector<uchar> buf;
     cv::Mat image = cv::imread(imgPath);
     cv::imencode(".jpg", image, buf);
@@ -149,8 +151,7 @@ int main() {
             idx += 1;
         }
     }
-    std::cout << res2[res2.size() - 1] << " " << imgPath << std::endl;
-    // 输入
+    */
     /*
     json inputData;
     inputData["image"] = str_encode;
@@ -162,14 +163,16 @@ int main() {
     };
     auto res = cli.Post("/AI_Interface/ai_predict", headers, inputData.dump(), "application/json");
      */
+    /* pathlib的简单使用
+    std::cout << "Start" << std::endl;
+    std::string pathRoot = "/mnt/YuHe/remote_code";
+    auto pathObj = PathLib(pathRoot);
+    auto path3 = pathObj.PathJoin("2.jpg");
+    std::cout << path3 << std::endl;
+    */
 
-    std::string val = "1234";
-    std::string val2 = val;
-
-
-    val2 = val2.substr(0, 3);
-    std::cout << val2 << " " << val << std::endl;
-
+    std::string imgPath = "/mnt/YuHe/remote_code/2.jpg";
+    std::cout << PathLib().FileExist(imgPath) << std::endl;
     std::cout << "Done" << std::endl;
     return 1;
 }
