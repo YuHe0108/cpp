@@ -3,10 +3,9 @@
 //
 #include "common.h"
 
-std::vector<std::string> split_string(const std::string& str, const std::string& val) {
+std::vector<std::string> splitString(const std::string& str, const std::string& val) {
     std::vector<std::string> res;
     std::vector<int> splitIdx; // 需要切分的位置
-
     // 复制一份字符串
     std::string cpStr = str;
     // 匹配、切分
@@ -19,7 +18,7 @@ std::vector<std::string> split_string(const std::string& str, const std::string&
     return res;
 }
 
-std::string copy_string(const std::string &str){
+std::string copyString(const std::string &str){
     // 深拷贝字符串
     const char *source = str.c_str();
     char res[str.size()];

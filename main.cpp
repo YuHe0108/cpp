@@ -1,6 +1,5 @@
 // Created by yuhe on 2022/11/28.
 
-#include <experimental/filesystem>
 #include <iostream>
 #include <memory>
 #include <future>
@@ -78,7 +77,7 @@ using json = nlohmann::json;
 int main() {
     /*
     std::shared_ptr<cv::Mat> inputs = std::make_shared<cv::Mat>(cv::imread("/mnt/YuHe/remote_code/2.jpg"));
-    auto res = LetterBox(inputs, 224, 224);
+    auto res = letterBox(inputs, 224, 224);
     std::cout << (res == nullptr) << std::endl;
     */
     /*
@@ -143,7 +142,7 @@ int main() {
     std::cout << "split" << (value.find("a") == value.npos) << std::endl;
 
 
-    auto res2 = split_string(imgPath, ".");
+    auto res2 = splitString(imgPath, ".");
     if (!res2.empty()) {
         int idx = 0;
         for (const auto &item: res2) {
@@ -167,12 +166,17 @@ int main() {
     std::cout << "Start" << std::endl;
     std::string pathRoot = "/mnt/YuHe/remote_code";
     auto pathObj = PathLib(pathRoot);
-    auto path3 = pathObj.PathJoin("2.jpg");
+    auto path3 = pathObj.pathJoin("2.jpg");
     std::cout << path3 << std::endl;
     */
 
     std::string imgPath = "/mnt/YuHe/remote_code/2.jpg";
-    std::cout << PathLib().FileExist(imgPath) << std::endl;
+    std::shared_ptr<PathLib> pathlibObj = std::make_shared<PathLib>(PathLib());
+
+    std::shared_ptr<cv::Mat> img1 = std::make_shared<cv::Mat>(cv::imread(imgPath));
+
+    auto res = calcImageDiff(img1, img1, 20, 7);
+
     std::cout << "Done" << std::endl;
     return 1;
 }

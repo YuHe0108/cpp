@@ -9,8 +9,8 @@
 #include <vector>
 #include <cstring>
 
-std::vector<std::string> split_string(const std::string &str, const std::string &val);
+std::vector<std::string> splitString(const std::string &str, const std::string &val);
 
-std::string copy_string(const std::string &str);
+std::string copyString(const std::string &str);
 
 #endif //CPP_COMMON_H

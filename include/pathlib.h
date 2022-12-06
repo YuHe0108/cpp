@@ -13,17 +13,21 @@
 
 #include "common.h"
 
+namespace fileSystem = std::experimental::filesystem;
+
 class PathLib {
 public:
     PathLib() = default;
 
     PathLib(const std::string &inputPath);
 
-    std::vector<std::string> IterDir(const std::string &dir);
+    static std::vector<std::string> iterDir(const std::string &dir);
 
-    static bool FileExist(const std::string &path);
+    static bool fileExist(const std::string &path);
 
-    std::string PathJoin(const std::string &inputPath);
+    std::string pathJoin(const std::string &inputPath);
+
+    static void createDir(const std::string &inputDir);
 
     std::string path; // 路径
     std::string suffix; // 文件的后缀
