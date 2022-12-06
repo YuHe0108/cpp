@@ -73,6 +73,20 @@ void start() {
 */
 using json = nlohmann::json;
 
+void doGetHi(const httplib::Request &req, httplib::Response &res) {
+    std::cout << res.headers.empty() << std::endl;
+    res.set_content("hi", "text/plain");
+}
+
+void postTest(const httplib::Request &req, httplib::Response &res) {
+    std::cout << res.headers.empty() << std::endl;
+    std::cout << req.params.size() << std::endl;
+    auto content = nlohmann::json::parse(req.body.begin(), req.body.end());
+    std::cout << (content.find("a") == content.end()) << std::endl;
+    std::cout << content["file_name"] << std::endl;
+    std::cout << content["download_url"] << std::endl;
+    std::cout << "postTest" << std::endl;
+}
 
 int main() {
     /*
@@ -169,13 +183,16 @@ int main() {
     auto path3 = pathObj.pathJoin("2.jpg");
     std::cout << path3 << std::endl;
     */
-
-    std::string imgPath = "/mnt/YuHe/remote_code/2.jpg";
+    /*
     std::shared_ptr<PathLib> pathlibObj = std::make_shared<PathLib>(PathLib());
-
     std::shared_ptr<cv::Mat> img1 = std::make_shared<cv::Mat>(cv::imread(imgPath));
-
     auto res = calcImageDiff(img1, img1, 20, 7);
+    */
+
+    httplib::Server svr;
+    svr.Get("/hi", doGetHi);
+    svr.Post("/test", postTest);
+    svr.listen("0.0.0.0", 8080);
 
     std::cout << "Done" << std::endl;
     return 1;
