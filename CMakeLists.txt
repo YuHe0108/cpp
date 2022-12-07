@@ -10,10 +10,11 @@ include_directories(./include)
 include_directories(./include/NumCpp)
 include_directories(./include/CppHttplib)
 include_directories(./include/nlohmann)
+include_directories(./include/database)
 
+link_directories(${PROJECT_SOURCE_DIR}/include/database/lib)
 
-file(GLOB SC_FILES "*.cpp" "*.h")
+file(GLOB SC_FILES "*.cpp" "*.h" "*.c")
 aux_source_directory(./src SRC_LIST)
 add_executable(${PROJECT_NAME} ${SC_FILES} ${SRC_LIST})
-target_link_libraries(cpp ${OpenCV_LIBS} stdc++fs)
-
+target_link_libraries(cpp ${OpenCV_LIBS} stdc++fs libsqlite3.so)

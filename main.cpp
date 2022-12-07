@@ -1,5 +1,5 @@
 // Created by yuhe on 2022/11/28.
-
+#include <atomic>
 #include <iostream>
 #include <memory>
 #include <future>
@@ -14,6 +14,8 @@
 #include "pathlib.h"
 #include "common.h"
 #include "base64.h"
+#include "database/sqlite3.h"
+
 /*
 class Point;
 
@@ -188,12 +190,24 @@ int main() {
     std::shared_ptr<cv::Mat> img1 = std::make_shared<cv::Mat>(cv::imread(imgPath));
     auto res = calcImageDiff(img1, img1, 20, 7);
     */
-
+    /* 接口的调用
     httplib::Server svr;
     svr.Get("/hi", doGetHi);
     svr.Post("/test", postTest);
     svr.listen("0.0.0.0", 8080);
+    */
+    std::atomic_int gd{0};
+    int num3 = 4;
+    std::cout << gd + 4 << std::endl;
 
+
+    sqlite3 *sql = NULL; // 一个打开的数据库实例
+    const char * path = "test.db";//某个sql文件的路径
+    int result = sqlite3_open_v2(path, &sql, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_NOMUTEX | SQLITE_OPEN_SHAREDCACHE, NULL);
+
+
+    std::cout << std::system("nvidia-smi") << std::endl;
+    std::cout << std::system("pwd") << std::endl;
     std::cout << "Done" << std::endl;
     return 1;
 }
