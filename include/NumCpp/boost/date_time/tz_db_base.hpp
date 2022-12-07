@@ -26,7 +26,7 @@
 namespace boost {
   namespace date_time {
 
-    //! Exception thrown when tz database cannot locate requested data file
+    //! Exception thrown when tz sqlite3 cannot locate requested data file
     class data_not_accessible : public std::logic_error
     {
      public:
@@ -38,7 +38,7 @@ namespace boost {
        {}
     };
     
-    //! Exception thrown when tz database locates incorrect field structure in data file
+    //! Exception thrown when tz sqlite3 locates incorrect field structure in data file
     class bad_field_count : public std::out_of_range
     {
      public:
@@ -47,7 +47,7 @@ namespace boost {
       {}
     };
 
-    //! Creates a database of time_zones from csv datafile
+    //! Creates a sqlite3 of time_zones from csv datafile
     /*! The csv file containing the zone_specs used by the
      * tz_db_base is intended to be customized by the
      * library user. When customizing this file (or creating your own) the
@@ -164,7 +164,7 @@ namespace boost {
       typedef boost::date_time::dst_adjustment_offsets<time_duration_type> dst_adjustment_offsets;
       typedef std::basic_string<char_type> string_type;
 
-      //! Constructs an empty database
+      //! Constructs an empty sqlite3
       tz_db_base() {}
 
       //! Process csv data file, may throw exceptions
@@ -195,7 +195,7 @@ namespace boost {
       //! returns true if record successfully added to map
       /*! Takes a region name in the form of "America/Phoenix", and a 
        * time_zone object for that region. The id string must be a unique 
-       * name that does not already exist in the database. */
+       * name that does not already exist in the sqlite3. */
       bool add_record(const string_type& region, 
                       boost::shared_ptr<time_zone_base_type> tz)
       {
@@ -218,7 +218,7 @@ namespace boost {
         return record->second;
       }
 
-      //! Returns a vector of strings holding the time zone regions in the database
+      //! Returns a vector of strings holding the time zone regions in the sqlite3
       std::vector<std::string> region_list() const
       {
         typedef std::vector<std::string> vector_type;
@@ -325,7 +325,7 @@ namespace boost {
       /*! Take a line from the csv, turn it into a time_zone_type,
        * and add it to the map. Zone_specs in csv file are expected to 
        * have eleven fields that describe the time zone. Returns true if 
-       * zone_spec successfully added to database */
+       * zone_spec successfully added to sqlite3 */
       bool parse_string(string_type& s)
       {
         std::vector<string_type> result;

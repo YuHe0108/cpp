@@ -14,7 +14,7 @@
 #include "pathlib.h"
 #include "common.h"
 #include "base64.h"
-#include "database/sqlite3.h"
+#include "sqlite3/sqlite3.h"
 
 /*
 class Point;
@@ -200,10 +200,32 @@ int main() {
     int num3 = 4;
     std::cout << gd + 4 << std::endl;
 
-
+    // 创建一个表格
     sqlite3 *sql = NULL; // 一个打开的数据库实例
-    const char * path = "test.db";//某个sql文件的路径
+    const char *path = "test.db";//某个sql文件的路径
     int result = sqlite3_open_v2(path, &sql, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_NOMUTEX | SQLITE_OPEN_SHAREDCACHE, NULL);
+
+    char *errMsg = NULL;
+    result = sqlite3_exec(sql, "CREATE TABLE person(name QString, age QInt)", 0, 0, &errMsg);
+    std::cout << (result == SQLITE_OK) << std::endl;
+    std::cout << *errMsg << std::endl;
+
+    // 插入数据
+    const char *sqlSentence = "INSERT INTO person(name, age) VALUES('小明', 222); "; //SQL语句
+    sqlite3_stmt *stmt = NULL; //stmt语句句柄
+    //进行插入前的准备工作——检查语句合法性, -1代表系统会自动计算SQL语句的长度
+    int result2 = sqlite3_prepare_v2(sql, sqlSentence, -1, &stmt, NULL);
+    if (result2 == SQLITE_OK) {
+        std::clog << "添加数据语句done";
+        sqlite3_step(stmt);  //执行该语句
+    } else {
+        std::clog << "添加数据语句wrong";
+    }
+    //清理语句句柄，准备执行下一个语句
+    sqlite3_finalize(stmt);
+    // 增删改查
+    sqlite3_close_v2(sql);
+    sql = nullptr;
 
 
     std::cout << std::system("nvidia-smi") << std::endl;

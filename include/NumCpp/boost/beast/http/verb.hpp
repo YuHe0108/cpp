@@ -54,7 +54,7 @@ enum class verb
         The data POSTed might be, for example, an annotation for existing
         resources; a message for a bulletin board, newsgroup, mailing list,
         or comment thread; a block of data that is the result of submitting
-        a web form to a data-handling process; or an item to add to a database
+        a web form to a data-handling process; or an item to add to a sqlite3
     */
     post,
 
