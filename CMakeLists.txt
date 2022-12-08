@@ -10,9 +10,9 @@ include_directories(./include)
 include_directories(./include/NumCpp)
 include_directories(./include/CppHttplib)
 include_directories(./include/nlohmann)
-include_directories(./include/database)
+include_directories(./include/sqlite3)
 
-link_directories(${PROJECT_SOURCE_DIR}/include/database/lib)
+link_directories(${PROJECT_SOURCE_DIR}/include/sqlite3/lib)
 
 file(GLOB SC_FILES "*.cpp" "*.h" "*.c")
 aux_source_directory(./src SRC_LIST)

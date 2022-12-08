@@ -46,7 +46,7 @@ public:
     if (value == error::no_data)
       return "The query is valid, but it does not have associated data";
     if (value == error::no_recovery)
-      return "A non-recoverable error occurred during database lookup";
+      return "A non-recoverable error occurred during sqlite3 lookup";
     return "asio.netdb error";
   }
 };
