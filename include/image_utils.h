@@ -8,8 +8,9 @@
 #include <cstdio>
 #include <cassert>
 #include <iostream>
-#include <opencv2/opencv.hpp>
 #include <experimental/filesystem>
+
+#include "opencv2/opencv.hpp"
 
 std::shared_ptr<cv::Mat> letterBox(const std::shared_ptr<cv::Mat> &inputs, int resizeHeight, int resizedWidth);
 
